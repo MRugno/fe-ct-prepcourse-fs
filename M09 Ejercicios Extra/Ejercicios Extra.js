@@ -6,6 +6,12 @@ function deObjetoAarray(objeto) {
    // Estos elementos debe ser cada par clave:valor del objeto recibido.
    // [EJEMPLO]: {D: 1, B: 2, C: 3} ---> [['D', 1], ['B', 2], ['C', 3]].
    // Tu código:
+   var arrayDeArrays=[];
+   for(prop in objeto){
+      var array = [prop, objeto[prop]];
+      arrayDeArrays.push(array);
+   }
+   return arrayDeArrays;
 }
 
 function numberOfCharacters(string) {
@@ -14,6 +20,20 @@ function numberOfCharacters(string) {
    // Las letras deben estar en orden alfabético.
    // [EJEMPLO]: "adsjfdsfsfjsdjfhacabcsbajda" ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 }
    // Tu código:
+   var array = string.split("");
+   array.sort();
+   var letra= array[0];
+   var objeto={};
+   objeto[array[0]]=0;
+   array.forEach(element => {
+      if(element===letra){
+         objeto[element]+=1
+      }else{
+         objeto[element]=1;
+         letra=element;
+      }
+   });
+   return(objeto);
 }
 
 function capToFront(string) {
@@ -22,6 +42,19 @@ function capToFront(string) {
    // Retornar el string.
    // [EJEMPLO]: soyHENRY ---> HENRYsoy
    // Tu código:
+   var array= string.split("");
+   var nuevoArray=[];
+   array.forEach(element=>{
+      if(element===element.toUpperCase()){
+         nuevoArray.push(element);
+      }
+   }); 
+   array.forEach(element=>{
+      if(element===element.toLowerCase()){
+         nuevoArray.push(element);
+      }
+   });
+   return(nuevoArray.join(""));
 }
 
 function asAmirror(frase) {
@@ -29,18 +62,37 @@ function asAmirror(frase) {
    // La diferencia es que cada palabra estará escrita al inverso.
    // [EJEMPLO]: "The Henry Challenge is close!"  ---> "ehT yrneH egnellahC si !esolc"
    // Tu código:
+
+   var array = frase.split(" ");
+   var fraseEspejo=[];
+   array.forEach(element=>{
+      fraseEspejo.push(element.split("").reverse().join(""));
+   });
+   return(fraseEspejo.join(" "));
+
+
 }
 
 function capicua(numero) {
    // Si el número que recibes es capicúa debes retornar el string: "Es capicua".
    // Caso contrario: "No es capicua".
    // Tu código:
+
+   var string=numero.toString();
+   var array=string.split("");
+
+   if(string===array.reverse().join("")){
+      return "Es capicua";
+   } return "No es capicua";
 }
 
 function deleteAbc(string) {
    // Tu tarea es eliminar las letras "a", "b" y "c" del string recibido.
    // Retorna el string sin estas letras.
    // Tu código:
+   var array= string.split("");
+   array=array.filter(n=> n!=="a" && n!=="b" && n!=="c");
+   return(array.join(""));
 }
 
 function sortArray(arrayOfStrings) {
@@ -49,6 +101,16 @@ function sortArray(arrayOfStrings) {
    // de la longitud de cada string.
    // [EJEMPLO]: ["You", "are", "beautiful", "looking"]  ---> [“You", "are", "looking", "beautiful"]
    // Tu código:
+   var matriz=[];
+   for(i=0;i<arrayOfStrings.length;i++){
+      matriz[i]=[arrayOfStrings[i].length,arrayOfStrings[i]];
+   };
+   matriz.sort((a, b) => a[0] - b[0]);
+   var resultado=[];
+   for(i=0;i<matriz.length;i++){
+      resultado.push(matriz[i][1]);
+   };
+  return(resultado);
 }
 
 function buscoInterseccion(array1, array2) {
@@ -58,6 +120,21 @@ function buscoInterseccion(array1, array2) {
    // Si no tienen elementos en común, retornar un arreglo vacío.
    // [PISTA]: los arreglos no necesariamente tienen la misma longitud.
    // Tu código:
+   var nuevoArreglo=[];
+   if(array1.length>=array2.length){
+      array1.forEach(element=>{
+         if((array2.includes(element))&&(!nuevoArreglo.includes(element))){
+            nuevoArreglo.push(element);
+         }
+      });
+   } else {
+      array2.forEach(element=>{
+         if((array1.includes(element))&&(!nuevoArreglo.includes(element))){
+            nuevoArreglo.push(element);
+         }
+      });
+   }
+   return(nuevoArreglo);
 }
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
